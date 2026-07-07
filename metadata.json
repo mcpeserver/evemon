@@ -1,0 +1,6 @@
+{
+  "name": "EVEMON SMP",
+  "description": "Website resmi EVEMON SMP - Komunitas Minecraft yang tenang, misterius, dan penuh petualangan di bawah sinar rembulan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
