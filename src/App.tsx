@@ -7,6 +7,7 @@ import ServerInfo from "./components/ServerInfo";
 import Rules from "./components/Rules";
 import Consequences from "./components/Consequences";
 import Footer from "./components/Footer";
+import background from "./assets/background.png";
 
 export default function App() {
   return (
@@ -19,7 +20,7 @@ export default function App() {
       {/* Background Image Parallax Overlay on general sections */}
       <div className="fixed inset-0 z-0 opacity-20 pointer-events-none">
         <img
-          src="/background.png"
+          src={background}
           alt="EVEMON Forest Night Background"
           className="w-full h-full object-cover filter blur-[2px] brightness-[0.15]"
           referrerPolicy="no-referrer"

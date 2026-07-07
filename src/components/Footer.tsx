@@ -2,6 +2,7 @@ import React from "react";
 import { siteConfig } from "../config/site";
 import { useDeveloperConfig } from "../hooks/useDeveloperConfig";
 import { ExternalLink, Moon, ArrowUp } from "lucide-react";
+import logoImage from "../assets/logo.png";
 
 export default function Footer() {
   const { data, loading } = useDeveloperConfig();
@@ -26,7 +27,7 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left">
             <div className="flex items-center gap-2">
               <img
-                src="/logo.png"
+                src={logoImage}
                 alt="EVEMON Logo"
                 className="w-5 h-5 object-contain invert brightness-200"
                 referrerPolicy="no-referrer"

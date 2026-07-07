@@ -3,6 +3,8 @@ import { siteConfig } from "../config/site";
 import { useDeveloperConfig } from "../hooks/useDeveloperConfig";
 import { Copy, Check, Disc, MessageCircle, ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
+import heroImage from "../assets/hero.png";
+import logoImage from "../assets/logo.png";
 
 export default function Hero() {
   const { data } = useDeveloperConfig();
@@ -42,7 +44,7 @@ export default function Hero() {
       {/* Background Image with Cinematic Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero.png"
+          src={heroImage}
           alt="EVEMON World Night Landscape"
           className="w-full h-full object-cover scale-105 filter brightness-95"
           referrerPolicy="no-referrer"
@@ -73,7 +75,7 @@ export default function Hero() {
           className="relative w-32 h-32 md:w-44 md:h-44 rounded-full border border-neutral-800 bg-charcoal/40 backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(255,255,255,0.05)]"
         >
           <img
-            src="/logo.png"
+            src={logoImage}
             alt="EVEMON Logo"
             className="w-full h-full object-cover rounded-full invert brightness-200"
             referrerPolicy="no-referrer"

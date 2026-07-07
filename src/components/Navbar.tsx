@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { siteConfig } from "../config/site";
 import { Menu, X, ChevronRight, Gamepad2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import logoImage from "../assets/logo.png";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +49,7 @@ export default function Navbar() {
           >
             <div className="relative w-8 h-8 rounded-full bg-graphite/40 border border-neutral-800 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
               <img
-                src="/logo.png"
+                src={logoImage}
                 alt="EVEMON SMP Logo"
                 className="w-full h-full object-cover rounded-full invert brightness-200"
                 referrerPolicy="no-referrer"
