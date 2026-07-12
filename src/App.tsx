@@ -1,15 +1,90 @@
-import React from "react";
-import DeveloperBar from "./components/DeveloperBar";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Philosophy from "./components/Philosophy";
 import ServerInfo from "./components/ServerInfo";
 import Rules from "./components/Rules";
 import Consequences from "./components/Consequences";
+import Community from "./components/Community";
 import Footer from "./components/Footer";
-import background from "./assets/background.png";
+import background from "./assets/background.jpg";
+import heroImage from "./assets/hero.jpg";
+import logoImage from "./assets/logo.jpg";
+import { siteConfig } from "./config/site";
+import { useDeveloperConfig } from "./hooks/useDeveloperConfig";
 
 export default function App() {
+  const { data } = useDeveloperConfig();
+
+  // Multi-page SPA state based on hash
+  const [activeSection, setActiveSection] = useState(() => {
+    const hash = window.location.hash.replace("#", "");
+    return ["beranda", "filosofi", "server-info", "aturan", "komunitas"].includes(hash) ? hash : "beranda";
+  });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (["beranda", "filosofi", "server-info", "aturan", "komunitas"].includes(hash)) {
+        setActiveSection(hash);
+      } else {
+        setActiveSection("beranda");
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  // Dynamic Open Graph Tags & Favicon Setup
+  useEffect(() => {
+    // Dynamic document title
+    document.title = `${siteConfig.name} - ${siteConfig.description}`;
+
+    // Helper to update or create meta tags
+    const updateMetaTag = (property: string, content: string, isName = false) => {
+      const attr = isName ? "name" : "property";
+      let element = document.querySelector(`meta[${attr}="${property}"]`);
+      if (!element) {
+        element = document.createElement("meta");
+        element.setAttribute(attr, property);
+        document.head.appendChild(element);
+      }
+      element.setAttribute("content", content);
+    };
+
+    // SEO Meta
+    updateMetaTag("description", siteConfig.description, true);
+
+    // Open Graph Tags
+    updateMetaTag("og:title", siteConfig.name);
+    updateMetaTag("og:description", siteConfig.description);
+    updateMetaTag("og:type", "website");
+    updateMetaTag("og:url", window.location.href);
+
+    // Use dynamic/local background image as WhatsApp/OG thumbnail as requested
+    const thumbnail = background;
+    updateMetaTag("og:image", thumbnail);
+    updateMetaTag("og:image:width", "1200");
+    updateMetaTag("og:image:height", "630");
+
+    // Twitter
+    updateMetaTag("twitter:card", "summary_large_image", true);
+    updateMetaTag("twitter:title", siteConfig.name, true);
+    updateMetaTag("twitter:description", siteConfig.description, true);
+    updateMetaTag("twitter:image", thumbnail, true);
+
+    // Dynamic Favicon from Logo Image
+    const favUrl = logoImage;
+    let faviconLink = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
+    if (!faviconLink) {
+      faviconLink = document.createElement("link");
+      faviconLink.setAttribute("rel", "icon");
+      document.head.appendChild(faviconLink);
+    }
+    faviconLink.setAttribute("href", favUrl);
+  }, [data]);
+
   return (
     <div className="relative min-h-screen bg-obsidian text-moonwhite selection:bg-goldaccent/30 selection:text-white overflow-x-hidden font-sans">
       
@@ -37,19 +112,21 @@ export default function App() {
       {/* Structured Content Layout */}
       <div className="relative z-10 flex flex-col min-h-screen">
         
-        {/* Unified fixed, multi-layered Header */}
-        <div className="fixed top-0 left-0 right-0 z-50">
-          <DeveloperBar />
-          <Navbar />
-        </div>
+        {/* Unified sticky, multi-layered Header */}
+        <Navbar />
 
-        {/* Core sections */}
+        {/* Core sections (Anti-Lag Multi-page SPA rendering) */}
         <main className="flex-grow">
-          <Hero />
-          <Philosophy />
-          <ServerInfo />
-          <Rules />
-          <Consequences />
+          {activeSection === "beranda" && <Hero />}
+          {activeSection === "filosofi" && <Philosophy />}
+          {activeSection === "server-info" && <ServerInfo />}
+          {activeSection === "aturan" && (
+            <>
+              <Rules />
+              <Consequences />
+            </>
+          )}
+          {activeSection === "komunitas" && <Community />}
         </main>
 
         {/* Footer */}

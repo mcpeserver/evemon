@@ -2,7 +2,7 @@ import React from "react";
 import { siteConfig } from "../config/site";
 import { useDeveloperConfig } from "../hooks/useDeveloperConfig";
 import { ExternalLink, Moon, ArrowUp } from "lucide-react";
-import logoImage from "../assets/logo.png";
+import logoImage from "../assets/logo.jpg";
 
 export default function Footer() {
   const { data, loading } = useDeveloperConfig();
@@ -49,30 +49,56 @@ export default function Footer() {
                 href="#beranda"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector("#beranda")?.scrollIntoView({ behavior: "smooth" });
+                  window.location.hash = "#beranda";
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
                 className="text-neutral-400 hover:text-white hover:underline transition-all duration-200"
               >
                 Beranda
               </a>
               <a
+                href="#filosofi"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.hash = "#filosofi";
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="text-neutral-400 hover:text-white hover:underline transition-all duration-200"
+              >
+                Filosofi
+              </a>
+              <a
+                href="#server-info"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.hash = "#server-info";
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="text-neutral-400 hover:text-white hover:underline transition-all duration-200"
+              >
+                Informasi Server
+              </a>
+              <a
                 href="#aturan"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector("#aturan")?.scrollIntoView({ behavior: "smooth" });
+                  window.location.hash = "#aturan";
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
                 className="text-neutral-400 hover:text-white hover:underline transition-all duration-200"
               >
                 Aturan
               </a>
               <a
-                href={siteConfig.socials.discord}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#komunitas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.hash = "#komunitas";
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 className="text-neutral-400 hover:text-white hover:underline transition-all duration-200"
-                id="footer-discord-link"
               >
-                Discord Server
+                Hub Komunitas & Dev
               </a>
             </div>
           </div>

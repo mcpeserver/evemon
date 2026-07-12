@@ -3,8 +3,8 @@ import { siteConfig } from "../config/site";
 import { useDeveloperConfig } from "../hooks/useDeveloperConfig";
 import { Copy, Check, Disc, MessageCircle, ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
-import heroImage from "../assets/hero.png";
-import logoImage from "../assets/logo.png";
+import heroImage from "../assets/hero.jpg";
+import logoImage from "../assets/logo.jpg";
 
 export default function Hero() {
   const { data } = useDeveloperConfig();
@@ -25,10 +25,8 @@ export default function Hero() {
   };
 
   const handleScrollDown = () => {
-    const philosophySec = document.querySelector("#filosofi");
-    if (philosophySec) {
-      philosophySec.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    window.location.hash = "#filosofi";
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Helper for whatsapp link
